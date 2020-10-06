@@ -13,11 +13,11 @@
                     <br>
                     <strong><p class="card-text mb-auto">{{ $data->description }}</p></strong> <br>
                     <p class="card-text mb-auto">{{ $data->text_post }}</p>
-                    <small><div class="mb-1 text-muted">{{$data->created_at}} created by {{\App\Models\User::getUserName($data->id_author)}}</div></small>
+                    <small><div class="mb-1 text-muted">{{$data->created_at}} created by {{ $creatorName }} </div></small>
                     <br>
                     <div>
                         <a class="btn btn-primary" href="{{ route('getPostList')}}" >К списку статей</a>
-                        @if((!Auth::guest())&&($data->id_author == Auth::user()->getAuthIdentifier()))
+                        @if((!Auth::guest())&&($data->user_id == Auth::user()->getAuthIdentifier()))
                             <a class="btn btn-primary" href="{{ route('getFormUpdate',$data->id) }}">Редактировать статью</a>
                             <a class="btn btn-danger" href="{{ route('deletePost',$data->id) }}">Удалить статью</a>
                         @endif

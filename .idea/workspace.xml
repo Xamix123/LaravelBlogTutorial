@@ -20,7 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b77c98f2-f4f1-4f29-8bd9-17d602c5b08d" name="Default Changelist" comment="v 1.0.0 Create project. Create PostController and his methods. Create CommentController and create method.">
+      <change beforePath="$PROJECT_DIR$/.idea/laravelTestApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravelTestApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_30_113043_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_113043_create_posts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_30_113238_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_30_113238_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/inc/commentList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/commentList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/post/post.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/post/post.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/post/postList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/post/postList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +178,14 @@
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff" />
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
     </include_path>
   </component>
   <component name="ProjectId" id="1i3dw9Eddd8pGza4GBL4P9bf11P" />
@@ -180,6 +207,8 @@
       <recent name="$PROJECT_DIR$/resources/views/post" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config" />
+      <recent name="$PROJECT_DIR$/storage" />
       <recent name="$PROJECT_DIR$/resources/views/article" />
       <recent name="$PROJECT_DIR$/resources/views/layouts" />
     </key>
@@ -228,6 +257,10 @@
       <workItem from="1601587354879" duration="3461000" />
       <workItem from="1601591307798" duration="10938000" />
       <workItem from="1601602884027" duration="1150000" />
+      <workItem from="1601666121628" duration="910000" />
+      <workItem from="1601835926816" duration="10116000" />
+      <workItem from="1601888265607" duration="9841000" />
+      <workItem from="1601963087165" duration="35430000" />
     </task>
     <task id="LOCAL-00001" summary="v 1.0.0 Create project. Create PostController and his methods. Create CommentController and create method.">
       <created>1601603557779</created>
@@ -252,16 +285,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v 1.0.0 Create project. Create PostController and his methods. Create CommentController and create method." />
     <option name="LAST_COMMIT_MESSAGE" value="v 1.0.0 Create project. Create PostController and his methods. Create CommentController and create method." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="349" y="65" key="#Inspections" timestamp="1601574816745">
+    <state x="349" y="65" key="#Inspections" timestamp="1601891407811">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
-    <state x="349" y="65" key="#Inspections/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601574816745" />
+    <state x="349" y="65" key="#Inspections/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601891407811" />
     <state x="303" y="41" key="#PHP_CodeSniffer" timestamp="1601588058424">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
@@ -278,10 +312,10 @@
       <screen x="65" y="24" width="1301" height="744" />
     </state>
     <state x="453" y="132" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601551511505" />
-    <state x="453" y="141" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601591921937">
+    <state x="453" y="141" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602008962408">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
-    <state x="453" y="141" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601591921937" />
+    <state x="453" y="141" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1602008962408" />
     <state x="429" y="240" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601463073755">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
@@ -290,6 +324,10 @@
       <screen x="65" y="24" width="1301" height="744" />
     </state>
     <state x="454" y="298" key="ComposerInitDialogKey/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601582637189" />
+    <state x="164" y="96" width="1103" height="573" key="DiffContextDialog" timestamp="1601890646981">
+      <screen x="65" y="24" width="1301" height="744" />
+    </state>
+    <state x="164" y="96" width="1103" height="573" key="DiffContextDialog/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601890646981" />
     <state x="503" y="126" key="FileChooserDialogImpl" timestamp="1601588053810">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
@@ -326,6 +364,14 @@
       <screen x="65" y="24" width="1301" height="744" />
     </state>
     <state x="315" y="119" key="Vcs.Push.Dialog.v2/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601603809822" />
+    <state x="164" y="96" width="1103" height="573" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1601996656579">
+      <screen x="65" y="24" width="1301" height="744" />
+    </state>
+    <state x="164" y="96" width="1103" height="573" key="com.intellij.history.integration.ui.views.FileHistoryDialog/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601996656579" />
+    <state x="164" y="96" width="1103" height="573" key="dock-window-1" timestamp="1601996975135">
+      <screen x="65" y="24" width="1301" height="744" />
+    </state>
+    <state x="164" y="96" width="1103" height="573" key="dock-window-1/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601996975135" />
     <state x="406" y="121" width="618" height="580" key="find.popup" timestamp="1601466009404">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
@@ -334,10 +380,10 @@
       <screen x="65" y="24" width="1301" height="744" />
     </state>
     <state x="378" y="168" width="672" height="677" key="run.anything.popup/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601595245090" />
-    <state x="378" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1601602093844">
+    <state x="378" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1601992877564">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
-    <state x="378" y="89" width="672" height="678" key="search.everywhere.popup/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601602093844" />
+    <state x="378" y="89" width="672" height="678" key="search.everywhere.popup/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601992877564" />
     <state x="445" y="297" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1601205949079">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
