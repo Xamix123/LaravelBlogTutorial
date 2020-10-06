@@ -14,7 +14,7 @@
                             <h3 class="mb-0">{{$element->title}}</h3>
                             <div class="mb-1 text-muted">{{$element->created_at}}</div>
                             <p class="card-text mb-auto">{{ $element->description }}</p>
-                            <p class="text-right card-text mb-auto">Комментарии({{\App\Models\Comment::getCountCommentsForPost($element->id)}})</p>
+                            <p class="text-right card-text mb-auto">Комментарии({{ $element->count }})</p>
                             <a href="{{ route('getPost', $element->id)}}" class="stretched-link">Подробнее</a>
                         </div>
                     </div>

@@ -4,28 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
-use App\Models\Comment;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse as RedirectResponseAlias;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    private $post;
 
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
 
     /**
      * @return Application|Factory|View
      */
     public function getList()
     {
-        $countPosts = Post::getCountPosts();
-        $posts      = [];
+        $countPosts = $this->post->getCountPosts();
+        $posts = [];
         if ($countPosts != 0) {
-            $posts = DB::table('posts')->orderBy('created_at', 'desc')->simplePaginate(5);
+            $posts = $this->post->orderBy('created_at', 'DESC')->simplePaginate(5);
         }
+        $posts = $this->post->addCountCommentsByTheListPosts($posts);
 
         return view('post.postList', ['data' => $posts]);
     }//end getList()
@@ -41,34 +46,42 @@ class PostController extends Controller
 
 
     /**
-     * @param int $id
+     * @param Post $post
      * @return Application|Factory|RedirectResponseAlias|View
      */
-    public function getFormUpdate($id)
+    public function getFormUpdate(Post $post)
     {
-        $post = Post::find($id);
-        return $post->id_author != Auth::user()->getAuthIdentifier()
+        return $post->user_id != Auth::user()->getAuthIdentifier()
            ? redirect()->route('getPost', $post->id)->with('failed', 'Отказано в доступе')
            :  view('post.postUpdate', ['data' => $post]);
     }//end getFormUpdate()
 
 
     /**
-     * @param  $id
+     * @param Post $post
      * @return Application|Factory|View
      */
-    public function get($id)
+    public function get(Post $post)
     {
-        $countComments = Comment::getCountCommentsForPost($id);
-        $comments = $countComments == 0
+        $count = $post->comments()->get()->count();
+        $user = $post->user()->find($post->user_id)->toArray();
+        $comments = $post->count() == 0
             ? []
-            : Comment::getCommentList($id);
+            : $post->comments()->get();
+
+        if (! empty($comments)) {
+            foreach ($comments as $id => $comment) {
+                $comments[$id]['userName'] = $comment->user()->first()->name;
+            }
+        }
 
         return view(
             'post.post',
             [
-                'data'     => Post::find($id),
+                'data'     => $post,
                 'comments' => $comments,
+                'countComments' => $count,
+                'creatorName' => $user['name']
             ]
         );
     }//end get()
@@ -80,62 +93,54 @@ class PostController extends Controller
      */
     public function create(PostRequest $request)
     {
-        $post = new Post();
-        $post->id_author = (Auth::user()->getAuthIdentifier());
-        $post->title = ($request->input('title'));
-        $post->description = ($request->input('description'));
-        $post->text_post = ($request->input('textPost'));
-
-        $post->save();
+        $this->post = Post::create([
+           'user_id' => (Auth::user()->getAuthIdentifier()),
+           'title' => $request->input('title'),
+           'description' => $request->input('description'),
+           'text_post' => $request->input('textPost')
+        ]);
 
         return redirect()->route('getPostList')->with('success', 'Статья была добавлена');
     }//end create()
 
 
     /**
-     * @param  $id
-     * @param  PostRequest $request
+     * @param Post $post
+     * @param PostRequest $request
      * @return RedirectResponseAlias
      */
-    public function update($id, PostRequest $request)
+    public function update(Post $post, PostRequest $request)
     {
-        $result = null;
-        $post = Post::find($id);
-
         // need rewrite with roles
-        if ($post->id_author != Auth::user()->getAuthIdentifier()) {
-            $result = redirect()->route('getPost', $post->id)->with('failed', 'Отказано в доступе');
+        if ($post->user_id != Auth::user()->getAuthIdentifier()) {
+            return redirect()->route('getPost', $post->id)->with('failed', 'Отказано в доступе');
         } else {
-            $post->id_author   = Auth::user()->getAuthIdentifier();
-            $post->title       = $request->input('title');
-            $post->description = $request->input('description');
-            $post->text_post   = $request->input('textPost');
+            $post->update(
+                [
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'text_post' => $request->input('textPost')
+                ]
+            );
 
-            $post->save();
-
-            $result = redirect()->route('getPost', $post->id)->with('success', 'Статья была изменена');
+            return redirect()->route('getPost', $post->id)->with('success', 'Статья была изменена');
         }
-
-        return $result;
     }//end update()
 
 
     /**
-     * @param  $id
+     * @param Post $post
      * @return RedirectResponseAlias
+     * @throws Exception
      */
-    public function delete($id)
+    public function delete(Post $post)
     {
-        $post = Post::find($id);
-        $result = null;
-        if ($post->id_author != Auth::user()->getAuthIdentifier()) {
-            $result = redirect()->route('getPostList', $post->id)->with('failed', 'Отказано в доступе');
+        if ($post->user_id != Auth::user()->getAuthIdentifier()) {
+            return redirect()->route('getPostList', $post->id)->with('failed', 'Отказано в доступе');
         } else {
-            Comment::deleteCommentList($id);
+            $post->comments()->delete();
             $post->delete();
-            $result = redirect()->route('getPostList')->with('success', 'Статья была удалена');
+            return redirect()->route('getPostList')->with('success', 'Статья была удалена');
         }
-
-        return $result;
     }//end delete()
 }//end class

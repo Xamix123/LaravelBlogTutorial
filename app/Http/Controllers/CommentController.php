@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    private $comment;
 
+    public function __construct(Comment $comment)
+    {
+        $this->comment = $comment;
+    }
 
     /**
      * @param  CommentRequest $request
@@ -18,12 +23,12 @@ class CommentController extends Controller
      */
     public function create(CommentRequest $request, $id)
     {
-        $comment = new Comment();
-        $comment->id_user = Auth::user()->getAuthIdentifier();
-        $comment->id_post = $id;
-        $comment->text_comment = $request->input('textComment');
+        $this->comment = Comment::create([
+            'user_id' => (Auth::user()->getAuthIdentifier()),
+            'post_id' => $id,
+            'text_comment' => $request->input('textComment')
+        ]);
 
-        $comment->save();
         return redirect()->route('getPost', $id)->with('success', 'Коментарий был добавлен');
     }//end create()
 }//end class

@@ -37,6 +37,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        Route::bind('post', function ($value) {
+            return \App\Models\Post::where('id', $value)->first() ?? abort(404);
+        });
+
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')

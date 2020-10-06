@@ -10,7 +10,7 @@
         @else
             <br>
             <div class="container">
-                <p class="text-right"> Общее количество комментариев({{\App\Models\Comment::getCountCommentsForPost($data->id)}})</p>
+                <p class="text-right"> Общее количество комментариев({{ $countComments }})</p>
             </div>
             <br>
             @foreach($comments as $comment)
@@ -21,8 +21,7 @@
                                 <div class="col-md-11">
                                     <div class=" media">
                                         <div class="media-body">
-                                            <strong class=" text-white media-heading">
-                                                    {{ \App\Models\User::getUserName($comment->id_user) }}</strong>
+                                            <strong class=" text-white media-heading">{{$comment->userName}}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -37,7 +36,7 @@
                     <br>
             @endforeach
         @endif
-        @if(!Auth::guest())
+        @if(! Auth::guest())
             @include('inc.commentAddForm')
         @endif
             </div>

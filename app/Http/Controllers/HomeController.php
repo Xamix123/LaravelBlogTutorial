@@ -10,6 +10,12 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    private $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
 
     /**
      * Show the application dashboard.
@@ -18,13 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $countPosts = Post::getCountPosts();
-        $posts      = [];
+        $countPosts = $this->post->getCountPosts();
+        $count = $this->post->comments()->get()->count();
+        $posts = [];
         if ($countPosts != 0) {
-            $posts = Post::getLastPosts(Post::DEFAULT_NUMBER_POSTS);
+            $posts = $this->post->getLastPosts(Post::DEFAULT_NUMBER_POSTS);
         }
 
-        return view('home', ['data' => $posts]);
+        $posts = $this->post->addCountCommentsByTheListPosts($posts);
+
+        return view('home', [
+            'data' => $posts,
+        ]);
     }//end index()
 
     /**
