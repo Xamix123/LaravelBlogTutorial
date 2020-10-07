@@ -77,7 +77,7 @@ class PostController extends Controller
 
         if (! empty($comments)) {
             foreach ($comments as $id => $comment) {
-                $comments[$id]['userName'] = $comment->user()->first()->name;
+                $comments[$id]['userName'] = $comment->user->name;
             }
         }
 
