@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Comment
@@ -43,7 +42,6 @@ class Comment extends Model
      */
     protected $fillable = ['user_id', 'post_id', 'text_comment'];
 
-
     /**
      * @return BelongsTo
      */
@@ -51,9 +49,4 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
-
-    public function deleteCommentList($idPost)
-    {
-        return DB::table('comments')->where('id_post', '=', $idPost)->delete();
-    }//end deleteCommentList()
 }//end class

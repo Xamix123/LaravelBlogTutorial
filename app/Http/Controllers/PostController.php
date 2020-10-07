@@ -13,8 +13,14 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    /**
+     * @var Post
+     */
     private $post;
 
+    /**
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         $this->post = $post;
@@ -23,14 +29,15 @@ class PostController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function getList()
+    public function getListPosts()
     {
         $countPosts = $this->post->getCountPosts();
         $posts = [];
         if ($countPosts != 0) {
             $posts = $this->post->orderBy('created_at', 'DESC')->simplePaginate(5);
         }
-        $posts = $this->post->addCountCommentsByTheListPosts($posts);
+
+        $posts = $this->post->addCountCommentsOnTheListPosts($posts);
 
         return view('post.postList', ['data' => $posts]);
     }//end getList()
@@ -61,10 +68,9 @@ class PostController extends Controller
      * @param Post $post
      * @return Application|Factory|View
      */
-    public function get(Post $post)
+    public function getPost(Post $post)
     {
-        $count = $post->comments()->get()->count();
-        $user = $post->user()->find($post->user_id)->toArray();
+        $countComments = $post->comments()->get()->count();
         $comments = $post->count() == 0
             ? []
             : $post->comments()->get();
@@ -80,8 +86,8 @@ class PostController extends Controller
             [
                 'data'     => $post,
                 'comments' => $comments,
-                'countComments' => $count,
-                'creatorName' => $user['name']
+                'countComments' => $countComments,
+                'creatorName' => $post->user()->get()->first()->name
             ]
         );
     }//end get()
@@ -91,7 +97,7 @@ class PostController extends Controller
      * @param  PostRequest $request
      * @return RedirectResponseAlias
      */
-    public function create(PostRequest $request)
+    public function createPost(PostRequest $request)
     {
         $this->post = Post::create([
            'user_id' => (Auth::user()->getAuthIdentifier()),
@@ -109,22 +115,22 @@ class PostController extends Controller
      * @param PostRequest $request
      * @return RedirectResponseAlias
      */
-    public function update(Post $post, PostRequest $request)
+    public function updatePost(Post $post, PostRequest $request)
     {
         // need rewrite with roles
         if ($post->user_id != Auth::user()->getAuthIdentifier()) {
             return redirect()->route('getPost', $post->id)->with('failed', 'Отказано в доступе');
-        } else {
-            $post->update(
-                [
-                    'title' => $request->input('title'),
-                    'description' => $request->input('description'),
-                    'text_post' => $request->input('textPost')
-                ]
-            );
-
-            return redirect()->route('getPost', $post->id)->with('success', 'Статья была изменена');
         }
+
+        $post->update(
+            [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'text_post' => $request->input('textPost')
+            ]
+        );
+
+        return redirect()->route('getPost', $post->id)->with('success', 'Статья была изменена');
     }//end update()
 
 
@@ -133,14 +139,15 @@ class PostController extends Controller
      * @return RedirectResponseAlias
      * @throws Exception
      */
-    public function delete(Post $post)
+    public function deletePost(Post $post)
     {
         if ($post->user_id != Auth::user()->getAuthIdentifier()) {
             return redirect()->route('getPostList', $post->id)->with('failed', 'Отказано в доступе');
-        } else {
-            $post->comments()->delete();
-            $post->delete();
-            return redirect()->route('getPostList')->with('success', 'Статья была удалена');
         }
+
+        $post->comments()->delete();
+        $post->delete();
+
+        return redirect()->route('getPostList')->with('success', 'Статья была удалена');
     }//end delete()
 }//end class
