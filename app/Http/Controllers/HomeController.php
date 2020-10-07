@@ -10,8 +10,14 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    /**
+     * @var Post
+     */
     private $post;
 
+    /**
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         $this->post = $post;
@@ -25,13 +31,12 @@ class HomeController extends Controller
     public function index()
     {
         $countPosts = $this->post->getCountPosts();
-        $count = $this->post->comments()->get()->count();
         $posts = [];
         if ($countPosts != 0) {
             $posts = $this->post->getLastPosts(Post::DEFAULT_NUMBER_POSTS);
         }
 
-        $posts = $this->post->addCountCommentsByTheListPosts($posts);
+        $posts = $this->post->addCountCommentsOnTheListPosts($posts);
 
         return view('home', [
             'data' => $posts,

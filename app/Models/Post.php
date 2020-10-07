@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Post
@@ -47,50 +46,6 @@ class Post extends Model
      */
     protected $fillable = ['user_id', 'title', 'description', 'text_post'];
 
-    /**
-     * @var int
-     */
-    private $user_id;
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var int
-     */
-    private $text_post;
-
-    /**
-     * @return integer
-     */
-    public function getCountPosts()
-    {
-        return Post::get()->count();
-    }//end getCountPosts()
-
-    /**
-     * @return HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany('App\Models\Comment');
-    }
-
-    public function addCountCommentsByTheListPosts($posts)
-    {
-        foreach ($posts as $id => $post) {
-            $posts[$id]['count'] = $post->comments()->get()->count();
-        }
-
-        return $posts;
-    }
 
     /**
      * @return BelongsTo
@@ -101,10 +56,39 @@ class Post extends Model
     }
 
     /**
+     * @return HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCountPosts()
+    {
+        return Post::get()->count();
+    }//end getCountPosts()
+
+    /**
+     * @param $posts
+     * @return Collection
+     */
+    public function addCountCommentsOnTheListPosts($posts)
+    {
+        foreach ($posts as $id => $post) {
+            $posts[$id]['count'] = $post->comments()->get()->count();
+        }
+
+        return $posts;
+    }
+
+    /**
      * @param int $count
      * @return Collection
      */
-    public function getLastPosts($count)
+    public function getLastPosts(int $count)
     {
         return Post::orderBy('created_at', 'desc')
                 ->take($count)

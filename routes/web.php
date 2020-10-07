@@ -19,19 +19,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/post/add', [PostController::class, 'getFormAdd']) ->name('getFormAdd');
-    Route::post('/post/add', [PostController::class, 'create'])->name('createPost');
+    Route::post('/post/add', [PostController::class, 'createPost'])->name('createPost');
 
     Route::get('/post/{post}/update', [PostController::class, 'getFormUpdate'])->name('getFormUpdate');
-    Route::post('/post/{post}/update', [PostController::class, 'update'])->name('updatePost');
+    Route::post('/post/{post}/update', [PostController::class, 'updatePost'])->name('updatePost');
 
-    Route::get('/post/{post}/delete', [PostController::class, 'delete'])->name('deletePost');
+    Route::get('/post/{post}/delete', [PostController::class, 'deletePost'])->name('deletePost');
 
-    Route::post('/comment/{id}', [CommentController::class, 'create'])->name('addComment');
+    Route::post('/comment/{post}', [CommentController::class, 'createComment'])->name('addComment');
 });
 
 
-Route::get('/post/all', [PostController::class, 'getList'])->name('getPostList');
-Route::get('/post/{post}', [PostController::class, 'get'])->name('getPost');
+Route::get('/post/all', [PostController::class, 'getListPosts'])->name('getPostList');
+Route::get('/post/{post}', [PostController::class, 'getPost'])->name('getPost');
 
 Auth::routes();
 
