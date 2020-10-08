@@ -69,7 +69,7 @@ class PostController extends Controller
     public function getPost(Post $post)
     {
         $countComments = $post->comments()->get()->count();
-        $comments = $post->count() == 0
+        $comments = $countComments == 0
             ? []
             : $post->comments()->get();
 

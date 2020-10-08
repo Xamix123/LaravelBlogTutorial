@@ -19,14 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b77c98f2-f4f1-4f29-8bd9-17d602c5b08d" name="Default Changelist" comment="v 1.0.1.2 Small fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+    <list default="true" id="b77c98f2-f4f1-4f29-8bd9-17d602c5b08d" name="Default Changelist" comment="v 1.0.1.3 Small fix">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/post/postList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/post/postList.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +244,7 @@
       <workItem from="1601963087165" duration="42212000" />
       <workItem from="1602058430614" duration="6604000" />
       <workItem from="1602167089367" duration="3918000" />
-      <workItem from="1602174776239" duration="2768000" />
+      <workItem from="1602174776239" duration="3108000" />
     </task>
     <task id="LOCAL-00001" summary="v 1.0.0 Create project. Create PostController and his methods. Create CommentController and create method.">
       <created>1601603557779</created>
@@ -280,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602064330300</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="v 1.0.1.3 Small fix">
+      <created>1602178299979</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602178299979</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +304,8 @@
     <MESSAGE value="v 1.0.1 removed used DB methods. Added use of ORM methods. Changing the parameter in the route from id to Model using Route :: bind in RouteServiceProvider. Adding Laravel IDE Helper." />
     <MESSAGE value="v 1.0.1.1 Add php doc. Refactor name of Methods. Small fix" />
     <MESSAGE value="v 1.0.1.2 Small fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 1.0.1.2 Small fix" />
+    <MESSAGE value="v 1.0.1.3 Small fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 1.0.1.3 Small fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="349" y="65" key="#Inspections" timestamp="1602019736800">
@@ -374,10 +376,10 @@
       <screen x="65" y="24" width="1301" height="744" />
     </state>
     <state x="208" y="34" key="SettingsEditor/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1601593188377" />
-    <state x="315" y="119" key="Vcs.Push.Dialog.v2" timestamp="1602064457677">
+    <state x="315" y="119" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1602178319888">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
-    <state x="315" y="119" key="Vcs.Push.Dialog.v2/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1602064457677" />
+    <state x="315" y="119" width="800" height="526" key="Vcs.Push.Dialog.v2/65.24.1301.744/1366.0.1024.768@65.24.1301.744" timestamp="1602178319888" />
     <state x="164" y="96" width="1103" height="573" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1601996656579">
       <screen x="65" y="24" width="1301" height="744" />
     </state>
