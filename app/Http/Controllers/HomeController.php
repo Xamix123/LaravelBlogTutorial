@@ -36,8 +36,6 @@ class HomeController extends Controller
             $posts = $this->post->getLastPosts(Post::DEFAULT_NUMBER_POSTS);
         }
 
-        $posts = $this->post->addCountCommentsOnTheListPosts($posts);
-
         return view('home', [
             'data' => $posts,
         ]);

@@ -11,26 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     /**
-     * @var Comment
-     */
-    private $comment;
-
-    /**
-     * @param Comment $comment
-     */
-    public function __construct(Comment $comment)
-    {
-        $this->comment = $comment;
-    }
-
-    /**
      * @param CommentRequest $request
      * @param Post $post
      * @return RedirectResponse
      */
     public function createComment(CommentRequest $request, Post $post)
     {
-        $this->comment = Comment::create([
+        Comment::create([
             'user_id' => (Auth::user()->getAuthIdentifier()),
             'post_id' => $post->id,
             'text_comment' => $request->input('textComment')

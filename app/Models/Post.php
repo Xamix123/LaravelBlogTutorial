@@ -72,16 +72,14 @@ class Post extends Model
     }//end getCountPosts()
 
     /**
-     * @param $posts
+     * @param $post
      * @return Collection
      */
-    public function addCountCommentsOnTheListPosts($posts)
+    public function addCountComments($post)
     {
-        foreach ($posts as $id => $post) {
-            $posts[$id]['count'] = $post->comments()->get()->count();
-        }
+        $post['count'] = $post->comments()->get()->count();
 
-        return $posts;
+        return $post;
     }
 
     /**
@@ -90,7 +88,8 @@ class Post extends Model
      */
     public function getLastPosts(int $count)
     {
-        return Post::orderBy('created_at', 'desc')
+        return Post::withCount('comments')
+                ->orderBy('created_at', 'desc')
                 ->take($count)
                 ->get();
     }//end getLastPosts()
