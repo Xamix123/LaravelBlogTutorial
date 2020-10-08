@@ -34,11 +34,9 @@ class PostController extends Controller
         $countPosts = $this->post->getCountPosts();
         $posts = [];
         if ($countPosts != 0) {
-            $posts = $this->post->orderBy('created_at', 'DESC')->simplePaginate(5);
+            $posts = Post::withCount('comments')->orderBy('created_at', 'DESC')
+                ->simplePaginate(5);
         }
-
-        $posts = $this->post->addCountCommentsOnTheListPosts($posts);
-
         return view('post.postList', ['data' => $posts]);
     }//end getList()
 
@@ -99,7 +97,7 @@ class PostController extends Controller
      */
     public function createPost(PostRequest $request)
     {
-        $this->post = Post::create([
+        Post::create([
            'user_id' => (Auth::user()->getAuthIdentifier()),
            'title' => $request->input('title'),
            'description' => $request->input('description'),
